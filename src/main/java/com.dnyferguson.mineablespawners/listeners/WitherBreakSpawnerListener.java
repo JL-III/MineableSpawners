@@ -2,8 +2,6 @@ package com.dnyferguson.mineablespawners.listeners;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
-import com.dnyferguson.mineablespawners.utils.Chat;
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.EntityType;
@@ -12,10 +10,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class WitherBreakSpawnerListener implements Listener {
     private MineableSpawners plugin;
@@ -55,26 +51,7 @@ public class WitherBreakSpawnerListener implements Listener {
 
         CreatureSpawner spawner = (CreatureSpawner) block.getState();
 
-        ItemStack item = new ItemStack(XMaterial.SPAWNER.parseMaterial());
-        ItemMeta meta = item.getItemMeta();
-        String mobFormatted = Chat.uppercaseStartingLetters(spawner.getSpawnedType().toString());
-
-        if (meta != null) {
-            meta.setDisplayName(plugin.getConfigurationHandler().getMessage("global", "name").replace("%mob%", mobFormatted));
-            List<String> newLore = new ArrayList<>();
-            if (plugin.getConfigurationHandler().getList("global", "lore") != null && plugin.getConfigurationHandler().getBoolean("global", "lore-enabled")) {
-                for (String line : plugin.getConfigurationHandler().getList("global", "lore")) {
-                    newLore.add(Chat.format(line).replace("%mob%", mobFormatted));
-                }
-                meta.setLore(newLore);
-            }
-            item.setItemMeta(meta);
-        }
-
-        NBTItem nbti = new NBTItem(item);
-        nbti.setString("ms_mob", spawner.getSpawnedType().name());
-
-        item = nbti.getItem();
+        ItemStack item = MineableSpawners.getApi().getSpawnerFromEntityType(Objects.requireNonNull(spawner.getSpawnedType()));
 
         if (block.getLocation().getWorld() != null) {
             block.getLocation().getWorld().dropItemNaturally(block.getLocation(), item);
