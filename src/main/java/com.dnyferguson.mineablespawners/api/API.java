@@ -6,6 +6,7 @@ import com.dnyferguson.mineablespawners.utils.Chat;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -57,7 +58,19 @@ public class API {
         ItemStack item = new ItemStack(Objects.requireNonNull(XMaterial.SPAWNER.parseMaterial()));
         ItemMeta meta = item.getItemMeta();
 
-        String mobFormatted = Chat.uppercaseStartingLetters(entityType.name().toString());
+        String mobFormatted = Chat.uppercaseStartingLetters(entityType.name());
+        if (meta == null) {
+            plugin.getLogger().severe("Attempted to get ItemMeta from spawner ItemStack, meta was null.");
+            return item;
+        }
+        item.setItemMeta(constructItemMeta(meta, mobFormatted));
+        NBTItem nbti = new NBTItem(item);
+        nbti.setString("ms_mob", entityType.name());
+
+        return nbti.getItem();
+    }
+
+    public ItemMeta constructItemMeta(ItemMeta meta, String mobFormatted) {
         meta.setDisplayName(plugin.getConfigurationHandler().getMessage("global", "name").replace("%mob%", mobFormatted));
         List<String> newLore = new ArrayList<>();
         if (plugin.getConfigurationHandler().getList("global", "lore") != null && plugin.getConfigurationHandler().getBoolean("global", "lore-enabled")) {
@@ -66,11 +79,8 @@ public class API {
             }
             meta.setLore(newLore);
         }
-        item.setItemMeta(meta);
-
-        NBTItem nbti = new NBTItem(item);
-        nbti.setString("ms_mob", entityType.name());
-
-        return nbti.getItem();
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        plugin.getLogger().info("added HIDE_POTION_EFFECTS flag to ItemMeta for spawner");
+        return meta;
     }
 }
