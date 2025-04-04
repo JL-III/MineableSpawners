@@ -79,8 +79,8 @@ public class API {
             }
             meta.setLore(newLore);
         }
-        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-        plugin.getLogger().info("added HIDE_POTION_EFFECTS flag to ItemMeta for spawner");
+        meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        plugin.getLogger().info("added HIDE_ADDITIONAL_TOOLTIP flag to ItemMeta for spawner");
         return meta;
     }
 }
