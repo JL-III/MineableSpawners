@@ -52,7 +52,7 @@ public class SpawnerPlaceListener implements Listener {
         Material material = block.getType();
 
         // check if item is spawner
-        if (material != XMaterial.SPAWNER.parseMaterial()) {
+        if (material != XMaterial.SPAWNER.get()) {
             return;
         }
 

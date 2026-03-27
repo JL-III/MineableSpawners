@@ -36,7 +36,7 @@ public class WitherBreakSpawnerListener implements Listener {
 
         Block block = event.getBlock();
 
-        if (!block.getType().equals(XMaterial.SPAWNER.parseMaterial())) {
+        if (!block.getType().equals(XMaterial.SPAWNER.get())) {
             return;
         }
 

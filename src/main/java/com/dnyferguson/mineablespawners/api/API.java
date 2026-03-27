@@ -27,7 +27,7 @@ public class API {
         // v3 compatibility
         try {
             NBTItem nbti = new NBTItem(item);
-            if (nbti.hasKey("ms_mob")) {
+            if (nbti.hasTag("ms_mob")) {
                 entityType = EntityType.valueOf(nbti.getString("ms_mob"));
                 return entityType;
             }
@@ -55,7 +55,7 @@ public class API {
     }
 
     public ItemStack getSpawnerFromEntityType(EntityType entityType) {
-        ItemStack item = new ItemStack(Objects.requireNonNull(XMaterial.SPAWNER.parseMaterial()));
+        ItemStack item = new ItemStack(Objects.requireNonNull(XMaterial.SPAWNER.get()));
         ItemMeta meta = item.getItemMeta();
 
         String mobFormatted = Chat.uppercaseStartingLetters(entityType.name());

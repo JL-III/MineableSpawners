@@ -17,7 +17,7 @@ public class SetSubCommand {
     private final Set<Material> invisibleBlocks = new HashSet<>();
 
     public SetSubCommand() {
-        invisibleBlocks.add(XMaterial.AIR.parseMaterial());
+        invisibleBlocks.add(XMaterial.AIR.get());
     }
 
     public void execute(MineableSpawners plugin, CommandSender sender, String type) {
@@ -50,7 +50,7 @@ public class SetSubCommand {
 
         Block target = player.getTargetBlock(invisibleBlocks, 5);
 
-        if (target.getState().getBlock().getType() != XMaterial.SPAWNER.parseMaterial()) {
+        if (target.getState().getBlock().getType() != XMaterial.SPAWNER.get()) {
             player.sendMessage(plugin.getConfigurationHandler().getMessage("set", "not-looking-at"));
             return;
         }

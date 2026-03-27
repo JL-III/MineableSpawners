@@ -30,7 +30,7 @@ public class SpawnerExplodeListener implements Listener {
         }
 
         for (Block block : e.blockList()) {
-            if (!block.getType().equals(XMaterial.SPAWNER.parseMaterial())) {
+            if (!block.getType().equals(XMaterial.SPAWNER.get())) {
                 continue;
             }
 

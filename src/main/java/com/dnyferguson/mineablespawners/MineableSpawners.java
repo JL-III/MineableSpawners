@@ -3,7 +3,6 @@ package com.dnyferguson.mineablespawners;
 import com.dnyferguson.mineablespawners.api.API;
 import com.dnyferguson.mineablespawners.commands.MineableSpawnersCommand;
 import com.dnyferguson.mineablespawners.listeners.*;
-import com.dnyferguson.mineablespawners.metrics.Metrics;
 import com.dnyferguson.mineablespawners.utils.ConfigurationHandler;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.EntityType;
@@ -48,8 +47,6 @@ public final class MineableSpawners extends JavaPlugin {
         }
 
         api = new API(this);
-        int pluginId = 7354;
-        Metrics metrics = new Metrics(this, pluginId);
     }
 
     private boolean setupEconomy() {
