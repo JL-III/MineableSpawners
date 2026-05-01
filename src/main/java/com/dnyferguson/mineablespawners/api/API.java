@@ -1,9 +1,10 @@
 package com.dnyferguson.mineablespawners.api;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
 import com.dnyferguson.mineablespawners.utils.Chat;
+
 import de.tr7zw.changeme.nbtapi.NBTItem;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFlag;
@@ -13,6 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.bukkit.Material;
 
 public class API {
     private final MineableSpawners plugin;
@@ -55,7 +58,7 @@ public class API {
     }
 
     public ItemStack getSpawnerFromEntityType(EntityType entityType) {
-        ItemStack item = new ItemStack(Objects.requireNonNull(XMaterial.SPAWNER.get()));
+        ItemStack item = new ItemStack(Material.SPAWNER);
         ItemMeta meta = item.getItemMeta();
 
         String mobFormatted = Chat.uppercaseStartingLetters(entityType.name());

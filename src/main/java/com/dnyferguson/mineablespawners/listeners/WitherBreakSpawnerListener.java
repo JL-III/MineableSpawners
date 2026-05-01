@@ -1,7 +1,7 @@
 package com.dnyferguson.mineablespawners.listeners;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
+
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.EntityType;
@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+
+import org.bukkit.Material;
 
 public class WitherBreakSpawnerListener implements Listener {
     private MineableSpawners plugin;
@@ -36,7 +38,7 @@ public class WitherBreakSpawnerListener implements Listener {
 
         Block block = event.getBlock();
 
-        if (!block.getType().equals(XMaterial.SPAWNER.get())) {
+        if (!block.getType().equals(Material.SPAWNER)) {
             return;
         }
 

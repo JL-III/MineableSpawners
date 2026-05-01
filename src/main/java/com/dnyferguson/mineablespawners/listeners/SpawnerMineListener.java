@@ -1,6 +1,5 @@
 package com.dnyferguson.mineablespawners.listeners;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
 import com.dnyferguson.mineablespawners.utils.Chat;
 import org.bukkit.GameMode;
@@ -68,7 +67,7 @@ public class SpawnerMineListener implements Listener {
         // check if block is spawner
         Block block = e.getBlock();
         Material material = block.getType();
-        if (!material.equals(XMaterial.SPAWNER.get())) {
+        if (!material.equals(Material.SPAWNER)) {
             return;
         }
 

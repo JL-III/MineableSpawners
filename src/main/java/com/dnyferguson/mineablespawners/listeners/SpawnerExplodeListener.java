@@ -1,7 +1,7 @@
 package com.dnyferguson.mineablespawners.listeners;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
+
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
@@ -11,6 +11,8 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+
+import org.bukkit.Material;
 
 public class SpawnerExplodeListener implements Listener {
     private final MineableSpawners plugin;
@@ -30,7 +32,7 @@ public class SpawnerExplodeListener implements Listener {
         }
 
         for (Block block : e.blockList()) {
-            if (!block.getType().equals(XMaterial.SPAWNER.get())) {
+            if (!block.getType().equals(Material.SPAWNER)) {
                 continue;
             }
 
